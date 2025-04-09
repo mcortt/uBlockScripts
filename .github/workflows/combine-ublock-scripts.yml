@@ -21,26 +21,22 @@ jobs:
           echo "// @name Combined uBlock Script" >> ublock-scripts.js
           echo "// ==/UserScript==" >> ublock-scripts.js
           echo "" >> ublock-scripts.js
-
           cat pixeltris.js >> ublock-scripts.js
           echo "" >> ublock-scripts.js
-
-          cat <<'EOF' >> ublock-scripts.js
-// ==UserScript==
-// @name YouTube Auto Theater Mode
-// @match *://www.youtube.com/watch*
-// ==/UserScript==
-
-(function() {
-  const enableTheaterMode = () => {
-    const btn = document.querySelector('.ytp-size-button');
-    const isTheater = document.querySelector('.ytd-watch-flexy[theater]');
-    if (btn && !isTheater) btn.click();
-  };
-  new MutationObserver(enableTheaterMode).observe(document.body, { childList: true, subtree: true });
-  enableTheaterMode();
-})();
-EOF
+          echo "// ==UserScript==" >> ublock-scripts.js
+          echo "// @name YouTube Auto Theater Mode" >> ublock-scripts.js
+          echo "// @match *://www.youtube.com/watch*" >> ublock-scripts.js
+          echo "// ==/UserScript==" >> ublock-scripts.js
+          echo "" >> ublock-scripts.js
+          echo "(function() {" >> ublock-scripts.js
+          echo "  const enableTheaterMode = () => {" >> ublock-scripts.js
+          echo "    const btn = document.querySelector('.ytp-size-button');" >> ublock-scripts.js
+          echo "    const isTheater = document.querySelector('.ytd-watch-flexy[theater]');" >> ublock-scripts.js
+          echo "    if (btn && !isTheater) btn.click();" >> ublock-scripts.js
+          echo "  };" >> ublock-scripts.js
+          echo "  new MutationObserver(enableTheaterMode).observe(document.body, { childList: true, subtree: true });" >> ublock-scripts.js
+          echo "  enableTheaterMode();" >> ublock-scripts.js
+          echo "})();" >> ublock-scripts.js
 
       - name: Commit and push changes
         run: |
