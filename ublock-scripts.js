@@ -745,6 +745,8 @@ twitch-videoad.js text/javascript
 // @match *://www.youtube.com/watch*
 // ==/UserScript==
 
+YTtheatre.js text/javascript
+
 (function() {
   const enableTheaterMode = () => {
     const btn = document.querySelector('.ytp-size-button');
