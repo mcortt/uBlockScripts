@@ -2,7 +2,7 @@ name: Update Combined uBlock Script
 
 on:
   schedule:
-    - cron: '0 */6 * * *'  # Every 6 hours
+    - cron: '0 0 */3 * *'  # Every 6 hours
   workflow_dispatch:       # Also lets you trigger it manually
 
 jobs:
