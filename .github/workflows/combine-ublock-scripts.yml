@@ -1,0 +1,52 @@
+name: Update Combined uBlock Script
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:       # Also lets you trigger it manually
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Fetch Pixeltris Twitch script
+        run: curl -sL https://raw.githubusercontent.com/pixeltris/TwitchAdSolutions/master/video-swap-new/video-swap-new-ublock-origin.js -o pixeltris.js
+
+      - name: Combine with YouTube Theater Mode script
+        run: |
+          echo "// ==UserScript==" > ublock-scripts.js
+          echo "// @name Combined uBlock Script" >> ublock-scripts.js
+          echo "// ==/UserScript==" >> ublock-scripts.js
+          echo "" >> ublock-scripts.js
+
+          cat pixeltris.js >> ublock-scripts.js
+          echo "" >> ublock-scripts.js
+
+          cat <<'EOF' >> ublock-scripts.js
+
+// ==UserScript==
+// @name YouTube Auto Theater Mode
+// @match *://www.youtube.com/watch*
+// ==/UserScript==
+
+(function() {
+  const enableTheaterMode = () => {
+    const btn = document.querySelector('.ytp-size-button');
+    const isTheater = document.querySelector('.ytd-watch-flexy[theater]');
+    if (btn && !isTheater) btn.click();
+  };
+  new MutationObserver(enableTheaterMode).observe(document.body, { childList: true, subtree: true });
+  enableTheaterMode();
+})();
+EOF
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add ublock-scripts.js
+          git commit -m "Auto-update combined uBlock script" || echo "No changes to commit"
+          git push
