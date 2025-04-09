@@ -26,7 +26,6 @@ jobs:
           echo "" >> ublock-scripts.js
 
           cat <<'EOF' >> ublock-scripts.js
-
 // ==UserScript==
 // @name YouTube Auto Theater Mode
 // @match *://www.youtube.com/watch*
