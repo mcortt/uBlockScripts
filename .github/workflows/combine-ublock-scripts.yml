@@ -17,16 +17,7 @@ jobs:
 
       - name: Combine with YouTube Theater Mode script
         run: |
-          echo "// ==UserScript==" > ublock-scripts.js
-          echo "// @name Combined uBlock Script" >> ublock-scripts.js
-          echo "// ==/UserScript==" >> ublock-scripts.js
-          echo "" >> ublock-scripts.js
           cat pixeltris.js >> ublock-scripts.js
-          echo "" >> ublock-scripts.js
-          echo "// ==UserScript==" >> ublock-scripts.js
-          echo "// @name YouTube Auto Theater Mode" >> ublock-scripts.js
-          echo "// @match *://www.youtube.com/watch*" >> ublock-scripts.js
-          echo "// ==/UserScript==" >> ublock-scripts.js
           echo "" >> ublock-scripts.js
           echo "YTtheatre.js text/javascript" >> ublock-scripts.js
           echo "" >> ublock-scripts.js
