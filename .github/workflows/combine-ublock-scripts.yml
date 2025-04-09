@@ -28,6 +28,8 @@ jobs:
           echo "// @match *://www.youtube.com/watch*" >> ublock-scripts.js
           echo "// ==/UserScript==" >> ublock-scripts.js
           echo "" >> ublock-scripts.js
+          echo "YTtheatre.js text/javascript" >> ublock-scripts.js
+          echo "" >> ublock-scripts.js
           echo "(function() {" >> ublock-scripts.js
           echo "  const enableTheaterMode = () => {" >> ublock-scripts.js
           echo "    const btn = document.querySelector('.ytp-size-button');" >> ublock-scripts.js
